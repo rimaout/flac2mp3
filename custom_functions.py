@@ -4,6 +4,7 @@ import argparse, os
 from mutagen.flac import FLAC   # Metadata
 from pydub import AudioSegment  # Audio processing
 
+
 def collect_args():
     parser = argparse.ArgumentParser(description='This script converts .flac files to .mp3 files, It provides functionality to convert a single FLAC file or all FLAC files within a directory and its subdirectories.')
     parser.add_argument('input_path', type=str, nargs='?', default=os.getcwd(), help='The path to the directory containing the files to process. Default is the current directory.')
@@ -33,7 +34,10 @@ def collect_args():
         else: 
             # if the input_path is a directory, the output_path is the input_path + "_converted"
             args.output_path = args.input_path + "_converted" 
-    
+
+    if not os.path.isdir(args.output_path):
+        parser.error("The output_path %s is not a directory!" % args.output_path)
+
     return args.input_path, args.num_threads, args.output_path
   
     
@@ -84,6 +88,7 @@ def get_metadata(file):
     for data in metadata:
         tags[data] = metadata[data][0]
     return tags
+
 
 def flac_mp3(input_file_path, output_file_path):
     # convert flac file to mp3
