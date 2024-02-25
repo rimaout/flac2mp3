@@ -1,4 +1,4 @@
-import custom_functions as cf
+from . import custom_functions as cf
 import os, shutil, time, sys
 
 from concurrent.futures import ThreadPoolExecutor # Multithreading
@@ -60,7 +60,7 @@ def file_thread(file_list, input_dir, output_dir, file_count, theads_count):
                 future.result()
 
 
-if __name__ == "__main__":
+def main():
     input_path, thread_count, output_path = cf.collect_args()
     input_path = os.path.abspath(input_path)
     output_path = os.path.abspath(output_path)
@@ -86,3 +86,6 @@ if __name__ == "__main__":
     minutes = int(total_time // 60)
     seconds = int(round(total_time % 60))
     print(f"Done! Converted {flac_count[0]} flac files and copied {file_count[0]} files in {minutes}.{seconds} minutes.")
+
+if __name__ == "__main__":
+    main()
