@@ -35,7 +35,7 @@ def collect_args():
             # if the input_path is a directory, the output_path is the input_path + "_converted"
             args.output_path = args.input_path + "_converted" 
 
-    if not os.path.isdir(args.output_path):
+    if os.path.isfile(args.output_path):
         parser.error("The output_path %s is not a directory!" % args.output_path)
 
     return args.input_path, args.num_threads, args.output_path
