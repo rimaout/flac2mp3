@@ -10,6 +10,8 @@ def collect_args():
     parser.add_argument('input_path', type=str, nargs='?', default=os.getcwd(), help='The path to the directory containing the files to process. Default is the current directory.')
     parser.add_argument('--num_threads', '-t', type=int, default=1, help='The number of threads to use. Default is 1.')
     parser.add_argument('--output_path', '-o', type=str, default=None, help='The path to the directory where the output files will be saved. Default is the same directory as the input file.')
+    parser.add_argument('--bitrate', '-b', type=int, default=5, help='The bitrare of the mp3 file, from 1 to 5. Default is 5. 1: 96k, 2: 128k, 3: 192k, 4: 255k, 5: 320k.')
+    parser.add_argument('--overwrite', '-ow', action='store_true', help='Overwrite the output file if it already exists.')
 
     args = parser.parse_args()
     
@@ -24,6 +26,12 @@ def collect_args():
     if args.num_threads < 1:
         parser.error("The number of threads must be at least 1")
     
+    if args.bitrate not in (1,2,3,4,5):
+        parser.error("Bitrate must be an int between 1 and 5, use flac2mp3 --help for more informations")
+    else:
+        bitrate_dict = {1:"96k", 2:'128k', 3:'192k', 4:'255k', 5:'320k'}
+        bitrate = bitrate_dict[args.bitrate]
+
     if args.output_path is None: 
         # if the output_path is not specified
 
@@ -37,11 +45,11 @@ def collect_args():
 
     if os.path.isfile(args.output_path):
         parser.error("The output_path %s is not a directory!" % args.output_path)
-
-    return args.input_path, args.num_threads, args.output_path
+    
+    return args.input_path, args.num_threads, args.output_path ,bitrate, args.overwrite
   
     
-def dir_scan(input_dir):
+def dir_scan(input_dir, overwrite):
     '''
     Funcion that scans a given directory and return the number of files, and a list of the file_paths to the files
     '''
@@ -81,12 +89,14 @@ def replace_extension(file, new_extension):
 
 
 def get_metadata(file):
-    # get metadata from flac file
+    '''input: flac file, output: dictionary with metadata from flac file''' 
 
-    metadata = FLAC(file)
+
+    metadata = FLAC(file) #Get metadata from flac
     tags = {}
     for data in metadata:
-        tags[data] = metadata[data][0]
+       #Save flac metatada in tags 
+        tags[data] = metadata[data][0] 
     return tags
 
 

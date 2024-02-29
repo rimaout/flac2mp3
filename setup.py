@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 import os
 
-VERSION = '1.0.5'
+VERSION = '1.0.6'
 DESCRIPTION = 'A Python CLI tool to convert FLAC to MP3'
 
 # Read the contents of your README file
@@ -21,7 +21,7 @@ setup(
     },
 
     author="mariout",
-    url='https://github.com/rimaout/flac2mp3',  # replace with your repository URL
+    url='https://github.com/rimaout/flac2mp3',  
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type='text/markdown',
