@@ -76,3 +76,8 @@ If you want to build this project yourself, follow these steps:
 ## License
 
 This program is released under the MIT License. See the `LICENSE` file for more details.
+
+## About
+This project was born out of a personal need. I needed a tool that could convert my extensive library of FLAC files to MP3 format all at once. This would allow me to enjoy my music collection on devices that don't support FLAC.
+
+This is one of my first projects and I'm still learning, so feel free to correct me or suggest improvements, raise issues or contribute to the project!

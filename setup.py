@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 import os
 
-VERSION = '1.0.6'
+VERSION = '1.1.0'
 DESCRIPTION = 'A Python CLI tool to convert FLAC to MP3'
 
 # Read the contents of your README file
