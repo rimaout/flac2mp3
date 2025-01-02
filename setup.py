@@ -20,7 +20,7 @@ setup(
         ],
     },
 
-    author="mariout",
+    author="rimaout",
     url='https://github.com/rimaout/flac2mp3',  
     description=DESCRIPTION,
     long_description=long_description,
